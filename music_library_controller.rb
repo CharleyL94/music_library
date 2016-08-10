@@ -39,3 +39,36 @@ end
   end
 
 # artist
+
+post '/artists:id' do
+  Artist.update(params)
+end
+
+get '/artists' do
+  @artists = Artist.all()
+  erb(:index)
+end
+
+  get '/artists/new' do
+    erb(:new)
+  end
+
+  get 'artists/:id/edit' do
+    @artist = Artist.find(params[:id])
+    erb(:edit)
+  end
+
+  get '/artists/:id' do
+    @artist = Artist.find(params[:id])
+    erb(:show)
+  end
+
+    post '/artists' do
+      @artist = Artist.new(params)
+      @artist.save()
+      erb(:create)
+    end
+
+  post '/artists/:id/delete' do
+    Artist.delete(params[:id])
+  end
